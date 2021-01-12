@@ -1,0 +1,9 @@
+Usage: ./main.py [COMMAND] [ARGS]
+	Commands:
+	-   update [FILE][, [FILE], ... ] - update database;
+	-   display [OPTION] - display statistics;
+	Display options:
+	top     - show top 10 teams by score;
+	player  - show top 10 players by goals;
+	rough   - show players by penalty count;
+	team    - show players on team with relevant stats.
