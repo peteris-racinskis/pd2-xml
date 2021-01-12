@@ -5,7 +5,6 @@ spamcopies.sh
 test.py
 xml_parse.py
 test.db
-storage/file.db
 
 #Byte-compiled / optimized / DLL files
 __pycache__/
