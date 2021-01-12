@@ -102,7 +102,7 @@ class Goal:
                 self.time,
                 self.passes[0],
                 self.passes[1],
-                #self.passes[2],
+                self.passes[2],
         )
 
     def __repr__(self):

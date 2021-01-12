@@ -4,8 +4,6 @@ from pd2.input.templates import Game, Team, Player, Referee, Goal, Penalty
 
 class DocParser:
     
-    MAGIC_CONSTANT = 40 # idk 
-
     def __init__(self, in_db):
         # Not optimal for very large datasets but this should easily fit in memory
         self.games = set()
