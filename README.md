@@ -13,7 +13,7 @@ $ ./main.py [ ... ARGUMENTS ... ]
 ```
 ### Usage
 
-Updating values in the database file:
+Reading file into database:
 
 ```
 $ ./main.py update file.xml
