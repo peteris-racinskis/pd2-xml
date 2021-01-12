@@ -11,14 +11,16 @@ class Runner:
     def __init__(self, args):
         self.mode = ""
         self.parse_config(args)
-        self.parser = DocParser()
         self.db_handler = DbHandler(self.config["DB_PATH"], self.schema)
 
     def run(self):
         if self.mode == "update":
-            packager = Packager(self.args, self.parser, self.db_handler)
+            old = set(self.db_handler.read_data("SELECT * FROM games;"))
+            parser = DocParser(old)
+            packager = Packager(self.args, parser, self.db_handler)
             packager.run()
         elif self.mode == "display":
+            formatter = Formatter(self.args[0], self.config, self.db_handler)
             formatter.run()
         else:
             self.usage()
