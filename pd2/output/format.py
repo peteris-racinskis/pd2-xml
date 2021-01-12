@@ -18,7 +18,7 @@ class Formatter:
             with open(config["QUERY_PATH"].format(k), 'r') as f:
                 for line in f.readlines():
                     self.Q_INDEX[k] = self.Q_INDEX[k] + [line]
-        print(self.Q_INDEX)
+    
 
     """
     Run:
@@ -39,14 +39,36 @@ class Formatter:
             self.rough()
         elif self.command == "referee":
             self.referee()
-        [print(self.format_string.format(x)) for x in self.data]
+        [print(self.format_string.format(*x)) for x in self.data]
     
 
     def top(self):
         pass
 
     def player(self):
-        pass
+        self.data[1] = self.data[1] + self.data[2] + self.data[3]
+        self.data.pop()
+        self.data.pop()
+        scores = {}
+        for p in self.data[0]:
+            if p not in scores.keys():
+                scores[p] = 1
+            else:
+                scores[p] = scores[p] + 1
+        passes = {}
+        for p in self.data[1]:
+            if p not in passes.keys():
+                passes[p] = 1
+            else:
+                passes[p] = passes[p] + 1
+        ret = [(k,v1) for (k,v1) in scores.items()]
+        for (k,v1) in ret:
+            if k not in passes.keys():
+                passes[k] = 0
+        ret = [(k, v1, passes[k]) for (k, v1) in ret]
+        ret.sort(key= lambda x: (-x[1], -x[2]))
+        self.data = [(v1, v2, k[2], k[3], k[0], k[1]) for (k,v1,v2) in ret[:10]]
+        self.format_string ="Score: {} Passes: {} - {}:{} \t- {} {}"
 
     def rough(self):
         pass
