@@ -7,7 +7,7 @@ class Game:
     def __init__(self, dom_instance, populate=False):
         self.date = dom_instance.getAttribute('Laiks')
         self.venue = dom_instance.getAttribute('Vieta')
-        self.ot = self.winner = self.loser = None
+        self.ot = self.winner = self.loser = self.refid = None
         if (populate):
             self.populate(dom_instance)
 
@@ -15,7 +15,14 @@ class Game:
         return self.date, self.venue
     
     def data(self):
-        return (self.date, self.venue, self.ot, self.winner, self.loser)
+        return (self.date, 
+                self.venue,
+                self.ot, 
+                self.winner, 
+                self.loser, 
+                self.refid[0], 
+                self.refid[1]
+        )
 
     def __repr__(self):
         return f"Game({self.data()})"
@@ -23,6 +30,7 @@ class Game:
     def populate(self, game):
         self.get_ot(game)
         self.get_result(game)
+        self.get_refid(game)
     
     def get_ot(self, game):
         goals = game.getElementsByTagName('VG')
@@ -38,6 +46,9 @@ class Game:
             scores.append(len(team.getElementsByTagName('VG')))
         self.winner = Team(teams[scores.index(max(scores))]).dump_id()
         self.loser = Team(teams[scores.index(min(scores))]).dump_id()
+    
+    def get_refid(self, game):
+        self.refid = Referee(game).dump_id()
         
 
 class Team:

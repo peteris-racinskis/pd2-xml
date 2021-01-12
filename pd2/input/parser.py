@@ -14,7 +14,6 @@ class DocParser:
             "penalties"   : set(),
             "referees"    : set(),
         }
-        print(self.data["games"])
 
 
     def read_documents(self, filenames):

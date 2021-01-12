@@ -6,7 +6,7 @@ class Packager:
     INSERTS = {
                 "players"   :   "(?, ?, ?, ?, ?)",
                 "teams"     :   "(?)",
-                "games"     :   "(?, ?, ?, ?, ?)",
+                "games"     :   "(?, ?, ?, ?, ?, ?, ?)",
                 "goals"     :   "(?, ?, ?, ?, ?, ?, ?, ?)",
                 "referees"  :   "(?, ?)",
                 "penalties" :   "(?, ?, ?, ?, ?, ?)",

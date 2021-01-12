@@ -1,1 +1,1 @@
-SELECT * FROM players
+SELECT players.firstname, players.lastname, players.num, players.team FROM players INNER JOIN penalties ON players.num=penalties.player AND players.team=penalties.team ORDER BY players.firstname
