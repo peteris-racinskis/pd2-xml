@@ -1,4 +1,6 @@
-from xml.dom.minidom import parse
+"""
+Relies on imports from xml.dom.minidom
+"""
 
 class Game:
 
@@ -55,7 +57,7 @@ class Team:
 class Player:
 
     def __init__(self, team, dom_instance):
-        self.num = dom_instance.getAttribute('Nr')
+        self.num = int(dom_instance.getAttribute('Nr'))
         self.team = Team(team).dump_id()
         self.firstname = dom_instance.getAttribute('Vards')
         self.lastname = dom_instance.getAttribute('Uzvards')
@@ -88,7 +90,7 @@ class Goal:
 
     def __init__(self, game, team, dom_instance):
         self.gameid = Game(game).dump_id()
-        self.playerid = (Team(team).dump_id(), dom_instance.getAttribute('Nr'))
+        self.playerid = (Team(team).dump_id(), int(dom_instance.getAttribute('Nr')))
         self.time = dom_instance.getAttribute('Laiks')
         self.passes = self.get_passes(dom_instance.getElementsByTagName('P'))
         
@@ -100,19 +102,17 @@ class Goal:
                 self.time,
                 self.passes[0],
                 self.passes[1],
-                self.passes[2],
+                #self.passes[2],
         )
 
     def __repr__(self):
         return f"Goal{self.data}"
     
     def get_passes(self, dom_array):
-        passes = [-1 for i in range(3)]
+        passes = [int(p.getAttribute('Nr')) for p in dom_array] + [-1 for i in range(3)]
         for p in dom_array:
-            del passes[0]
-            passes.append(p)
-        return passes.reverse()
-        
+            passes.pop()
+        return passes
 
 
 class Penalty:
@@ -128,7 +128,7 @@ class Penalty:
                 self.playerid[0], 
                 self.playerid[1],
                 self.ref[0],
-                self.re[1],
+                self.ref[1],
         )
 
     def __repr__(self):
@@ -136,48 +136,6 @@ class Penalty:
     
     def get_playerid(self, team, penalty):
         team = team.getAttribute('Nosaukums')
-        num = penalty.getAttribute('Nr')
+        num = int(penalty.getAttribute('Nr'))
         return team, num
-
-
-
-
-def get_teams(data):
-    return data.getElementsByTagName('Komanda')
-
-def get_score(team):
-    return len(team.getElementsByTagName('VG'))
-
-def get_goals(game, team):
-    goals = team.getElementsByTagName('VG')
-    return [Goal(game, team, x) for x in goals]
-
-def get_penalties(game, team):
-    penalties = team.getElementsByTagName('Sods')
-    return [Penalty(game, team, x) for x in penalties]
-
-def get_players(game):
-    ret = []
-    for team in game.getElementsByTagName('Komanda'):
-        ret = ret + [Player(team, x) 
-            for x in team.getElementsByTagName('Speletaji')[0]
-                        .getElementsByTagName('Speletajs')]
-    return ret
-
-
-game_info = parse("xml/0.xml")
-game = game_info.getElementsByTagName('Spele')[0]
-print(Game(game, populate=True))
-teams = get_teams(game_info)
-scores = [get_score(team) for team in teams]
-goals = [get_goals(game, team) for team in teams]
-penalties = [get_penalties(game, team) for team in teams]
-players = get_players(game)
-[print(x) for x in players]
-print(scores)
-for team in goals:
-    [print(goal) for goal in team] 
-for team in penalties:
-    [print(x) for x in team]
-
 
