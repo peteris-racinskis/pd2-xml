@@ -7,7 +7,7 @@ This piece of software is not intended for any practical application, as it was 
 No packaging provided, but since this tool only uses the Python standard library, no addtional software is required.
 
 ```
-$ git clone git@github.com:peteris-racinskis/pd2-xml.git
+$ git clone https://github.com/peteris-racinskis/pd2-xml.git
 $ cd pd2-xml/
 $ ./main.py [ ... ARGUMENTS ... ]
 ```
