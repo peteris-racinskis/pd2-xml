@@ -1,6 +1,10 @@
 # Project specific
 testfiles/
 *.vscode/
+spamcopies.sh
+test.py
+xml_parse.py
+
 #Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
