@@ -22,9 +22,10 @@ class Formatter:
     """
     Run:
     1:  Do query lookup, execute DB read operation;
-    2:  Apply any required mutations on data;
-    3:  Apply any required mutations on format string;
-    4:  Output to stdout.
+    2:  Pack returned data in a list of lists;
+    3:  Apply any required mutations on data;
+    4:  Apply any required mutations on format string;
+    5:  Output to stdout.
     """
     def run(self):
         self.format_string = "{}"
@@ -40,9 +41,25 @@ class Formatter:
             self.referee()
         [print(self.format_string.format(*x)) for x in self.data]
     
-
+    """
+    Just combines the results of a large number of separate queries.
+    Not very performant, but it works.
+    """
     def top(self):
-        pass
+        teams = []
+        for d in self.data:
+            teams = teams + d
+        tw = {x:self.data[0].count(x) for x in teams}                    # Total wins
+        ow = {x:self.data[1].count(x) for x in teams}                    # Overtime wins
+        ol = {x:self.data[2].count(x) for x in teams}                    # Overtime losses
+        tl = {x:self.data[3].count(x) for x in teams}                    # Total losses
+        gt = {x:self.data[4].count(x) for x in teams}                    # Goals taken
+        gl = {x:self.data[5].count(x) for x in teams}                    # Goals lost
+        sc = {x:(5*tw[x] + 3*ow[x] + 2*ol[x] + tl[x]) for x in teams}    # Score
+        ret = [(k[0],tw[k],ow[k],ol[k],tl[k],gt[k],gl[k],sc[k]) for k in tw]
+        ret.sort(key= lambda x: (-x[-1]))
+        self.data = ret
+        self.format_string = "Score: {7:}\t{0:<15}|\tWins (NOT/OT): {1}:{2}\t|\tLosses (NOT/OT): {3}:{4}\t|\tGoals (gain/lose): {5}:{6}"
     
     """
     Player:
@@ -80,5 +97,5 @@ class Formatter:
             for (k,v) in penalties.items()]
         ret.sort(key= lambda x: -x[3])
         self.data = [(v1,v2,v3,k[0],k[1]) for (k,v1,v2,v3) in ret]
-        self.format_string ="Penalties: {} Games: {} Average: {} - {}:{} "
+        self.format_string ="Penalties: {} Games: {} Average: {} - {}:{}"
     

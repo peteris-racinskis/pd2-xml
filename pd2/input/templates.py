@@ -104,7 +104,16 @@ class Goal:
         self.playerid = (Team(team).dump_id(), int(dom_instance.getAttribute('Nr')))
         self.time = dom_instance.getAttribute('Laiks')
         self.passes = self.get_passes(dom_instance.getElementsByTagName('P'))
+        self.other = self.get_other(game, team)
         
+    def get_other(self, game, my_team):
+        my_name = my_team.getAttribute('Nosaukums')
+        teams = game.getElementsByTagName('Komanda')
+        for team in teams:
+            name = team.getAttribute('Nosaukums')
+            if name != my_name:
+                return name
+
     def data(self):
         return (self.gameid[0],
                 self.gameid[1],
@@ -114,6 +123,7 @@ class Goal:
                 self.passes[0],
                 self.passes[1],
                 self.passes[2],
+                self.other,
         )
 
     def __repr__(self):
