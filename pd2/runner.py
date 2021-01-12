@@ -1,10 +1,10 @@
-#!/usr/bin/python3
 import sqlite3
 import json
 from pd2.input.parser import DocParser
 from pd2.input.packager import Packager
 from pd2.persist.db import DbHandler
 from pd2.output.format import Formatter
+
 
 class Runner:
 

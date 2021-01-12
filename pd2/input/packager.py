@@ -1,5 +1,3 @@
-
-
 class Packager:
     
     insert = "INSERT or IGNORE into {} VALUES {}"

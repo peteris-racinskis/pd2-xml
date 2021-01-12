@@ -15,7 +15,6 @@ class DocParser:
             "referees"    : set(),
         }
 
-
     def read_documents(self, filenames):
         for filename in filenames:
             print(filename)

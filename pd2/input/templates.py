@@ -65,6 +65,7 @@ class Team:
     def __repr__(self):
         return f"Team{self.data}"
 
+
 class Player:
 
     def __init__(self, team, dom_instance):
@@ -96,6 +97,7 @@ class Referee:
     
     def __repr__(self):
         return f"Referee{self.data}"
+
 
 class Goal:
 
