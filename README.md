@@ -22,7 +22,7 @@ $ ./main.py update file.xml
 Supports multiple filenames in arguments:
 
 ```
-$ ./main.py update ${path_to_directory}/*
+$ ./main.py update $(path_to_directory)/*
 ```
 
 Displaying statistics:
