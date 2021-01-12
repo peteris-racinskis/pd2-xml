@@ -1,15 +1,6 @@
 import sqlite3
 
 class DbHandler:
-    insert = "INSERT or IGNORE into {} VALUES {}"
-    INSERTS = {
-                "players"   :   "(?, ?, ?, ?, ?)",
-                "teams"     :   "(?)",
-                "games"     :   "(?, ?, ?, ?, ?)",
-                "goals"     :   "(?, ?, ?, ?, ?, ?, ?)",
-                "participants": "(?, ?, ?)",
-                "penalties" :   "(?, ?, ?)",
-    }
 
     def __init__(self, path, schema):
         try:
