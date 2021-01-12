@@ -16,14 +16,12 @@ $ ./main.py [ ... ARGUMENTS ... ]
 Updating values in the database file:
 
 ```
-# updating values in the database:
 $ ./main.py update file.xml
 ```
 
 Supports multiple filenames in arguments:
 
 ```
-# supports arbitary number of input files:
 $ ./main.py update ${path_to_directory}/*
 ```
 
