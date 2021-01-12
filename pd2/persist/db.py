@@ -21,7 +21,6 @@ class DbHandler:
         c.executemany(query, data)
         self.conn.commit()
         
-
     def read_data(self, query):
         c = self.conn.cursor()
         c.execute(query)
