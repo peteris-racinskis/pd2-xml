@@ -7,9 +7,9 @@ class Packager:
                 "players"   :   "(?, ?, ?, ?, ?)",
                 "teams"     :   "(?)",
                 "games"     :   "(?, ?, ?, ?, ?)",
-                "goals"     :   "(?, ?, ?, ?, ?, ?, ?)",
-                "participants": "(?, ?, ?)",
-                "penalties" :   "(?, ?, ?)",
+                "goals"     :   "(?, ?, ?, ?, ?, ?, ?, ?)",
+                "referees"  :   "(?, ?)",
+                "penalties" :   "(?, ?, ?, ?, ?, ?)",
     }        
 
 
@@ -20,6 +20,6 @@ class Packager:
 
     def run(self):
         self.parser.read_documents(self.args)
-        for k,v in self.parser.formatted:
+        for (k,v) in self.parser.data.items():
             self.db_handler.write_data(
                     self.insert.format(k,self.INSERTS[k]),v)

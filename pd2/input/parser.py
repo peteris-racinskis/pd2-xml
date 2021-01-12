@@ -6,13 +6,14 @@ class DocParser:
     
     def __init__(self, in_db):
         # Not optimal for very large datasets but this should easily fit in memory
-        self.games = set()
-        self.referees = set()
-        self.teams = set()
-        self.players = set()
-        self.goals = set()
-        self.penalties = set()
-
+        self.data = {
+            "games"       : set(),
+            "teams"       : set(),
+            "players"     : set(),
+            "goals"       : set(),
+            "penalties"   : set(),
+            "referees"    : set(),
+        }
         
     def read_documents(self, filenames):
         for filename in filenames:
@@ -22,7 +23,7 @@ class DocParser:
 
     def extract_info(self, game_info):
         game = game_info.getElementsByTagName('Spele')[0]
-        if Game(game).data() in self.games:
+        if Game(game).data() in self.data["games"]:
             return
         teams = game.getElementsByTagName('Komanda')
         players = []
@@ -36,11 +37,11 @@ class DocParser:
                 team.getElementsByTagName('VG')]
             penalties = penalties + [Penalty(game, team, x) for x in
                 team.getElementsByTagName('Sods')]
-        self.games.add(Game(game, populate=True).data())
-        self.referees.add(Referee(game).data())
-        [self.teams.add(Team(team).data()) for team in teams]
-        [self.players.add(x.data()) for x in players]
-        [self.goals.add(x.data()) for x in goals]
-        [self.penalties.add(x.data()) for x in penalties]
+        self.data["games"].add(Game(game, populate=True).data())
+        self.data["referees"].add(Referee(game).data())
+        [self.data["teams"].add(Team(team).data()) for team in teams]
+        [self.data["players"].add(x.data()) for x in players]
+        [self.data["goals"].add(x.data()) for x in goals]
+        [self.data["penalties"].add(x.data()) for x in penalties]
 
     

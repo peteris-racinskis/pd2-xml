@@ -49,7 +49,7 @@ class Team:
         return self.name
 
     def data(self):
-        return (self.name)
+        return (self.name,)
 
     def __repr__(self):
         return f"Team{self.data}"
