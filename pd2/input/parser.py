@@ -7,14 +7,16 @@ class DocParser:
     def __init__(self, in_db):
         # Not optimal for very large datasets but this should easily fit in memory
         self.data = {
-            "games"       : set(),
+            "games"       : in_db,
             "teams"       : set(),
             "players"     : set(),
             "goals"       : set(),
             "penalties"   : set(),
             "referees"    : set(),
         }
-        
+        print(self.data["games"])
+
+
     def read_documents(self, filenames):
         for filename in filenames:
             print(filename)
@@ -23,8 +25,10 @@ class DocParser:
 
     def extract_info(self, game_info):
         game = game_info.getElementsByTagName('Spele')[0]
-        if Game(game).data() in self.data["games"]:
+        if Game(game, populate=True).data() in self.data["games"]:
+            print("skipping")
             return
+        print("not skipping")
         teams = game.getElementsByTagName('Komanda')
         players = []
         goals = []
