@@ -36,7 +36,8 @@ class Game:
         goals = game.getElementsByTagName('VG')
         last = 0
         for g in goals:
-            last = max(int(g.getAttribute('Laiks').split(":")[0]), last)
+            t = g.getAttribute('Laiks')
+            last = max(int(t.split(":")[0]), last)
         self.ot = (last > 60)
     
     def get_result(self, game):

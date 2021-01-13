@@ -47,9 +47,9 @@ class Formatter:
     Not very performant, but it works.
     """
     def top(self):
-        teams = []
+        teams = set()
         for d in self.data:
-            teams = teams + d
+            teams.update(set(d))
         tw = {x:self.data[0].count(x) for x in teams}                    # Total wins
         ow = {x:self.data[1].count(x) for x in teams}                    # Overtime wins
         ol = {x:self.data[2].count(x) for x in teams}                    # Overtime losses
