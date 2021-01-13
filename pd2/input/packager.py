@@ -7,7 +7,7 @@ class Packager:
                 "games"     :   "(?, ?, ?, ?, ?, ?, ?)",
                 "goals"     :   "(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 "referees"  :   "(?, ?)",
-                "penalties" :   "(?, ?, ?, ?, ?, ?)",
+                "penalties" :   "(?, ?, ?, ?, ?, ?, ?)",
     }        
 
 

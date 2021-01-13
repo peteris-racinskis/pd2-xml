@@ -23,7 +23,7 @@ class DocParser:
 
     def extract_info(self, game_info):
         game_dom = game_info.getElementsByTagName('Spele')[0]
-        game =  Game(game_dom, populate=True).data()
+        game = Game(game_dom, populate=True).data()
         if game in self.data["games"]:
             print("skipping")
             return

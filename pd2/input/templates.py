@@ -145,10 +145,12 @@ class Penalty:
         self.gameid = Game(game).dump_id()
         self.playerid = self.get_playerid(team, dom_instance)
         self.ref = Referee(game).dump_id()
+        self.time = dom_instance.getAttribute('Laiks')
 
     def data(self):
         return (self.gameid[0],
                 self.gameid[1],
+                self.time,
                 self.playerid[0], 
                 self.playerid[1],
                 self.ref[0],
