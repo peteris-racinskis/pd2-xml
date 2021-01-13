@@ -60,7 +60,7 @@ class Formatter:
         ret = [(k[0],tw[k],ow[k],ol[k],tl[k],gt[k],gl[k],sc[k]) for k in tw]
         ret.sort(key= lambda x: (-x[-1]))
         self.data = ret
-        self.format_string = "Score: {7:}\t{0:<15}|\tWins (NOT/OT): {1}:{2}\t|\tLosses (NOT/OT): {3}:{4}\t|\tGoals (gain/lose): {5}:{6}"
+        self.format_string = "Score: {7:}\t{0:<15}|\tWins (NOT/OT): {1}:{2}\t|\tLosses (OT/NOT): {3}:{4}\t|\tGoals (gain/lose): {5}:{6}"
     
     """
     Player:
